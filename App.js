@@ -1,23 +1,31 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Button, } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, FlatList, TextInput } from 'react-native';
 import yeet from './images/yeet520.png';
 
 export default class App extends React.Component {
+
+  constructor(props){
+    super(props)
+    this.state = {
+      yeets: [],
+      text: ''
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Image source={yeet} style={styles.image}></Image>
-        <Text style={styles.text}>
-          YEET
-        </Text>
-        <View style={styles.button}> 
-          <Button
-            onPress={() => alert('lel')}
-            title="Start yeetin'"
-            color="#ffff"
-            accessibilityLabel="Login button"
-          />
+        <View style={{padding: 10}}>
+        <TextInput
+          onSubmit={(text) => this.setState({text})}
+          style={{height: 40, fontSize: 42}}
+          placeholder="enter your yeet~"
+        />
         </View>
+        <FlatList
+          data={this.state.yeets}
+          renderItem={({item}) => <Text onPress={() => alert(item.key)} style={styles.item}>{item.key}</Text>}
+        />
       </View>
     );
   }
@@ -26,22 +34,11 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1abc9c',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  image: {
-    height: 375,
-    width: 375,
-    resizeMode: 'contain',
-  },
-  button: {
-    position: 'absolute',
-    bottom: 75,
-  },
-  text: {
-    fontFamily: 'Chalkboard SE',
-    fontSize: 74,
-    color: '#ffff',
-  }
+    paddingTop: 22
+   },
+   item: {
+     padding: 10,
+     fontSize: 18,
+     height: 44,
+   },
 });
