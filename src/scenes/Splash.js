@@ -24,7 +24,7 @@ class Splash extends Component {
         </Text>
         <View style={styles.button}> 
           <Button
-            onPress={() => this.props.navigation.push('home')}
+            onPress={() => this.props.navigation.navigate('home')}
             title="Start yeetin'"
             color="#ffff"
             accessibilityLabel="Login button"
